@@ -28,12 +28,12 @@
 
       <article class="inicioreserva">
 
-        <form action="#">
+        <form action="/reserva/#/available">
 
           <section>
 
             <label for="checkin">Entrada</label>
-            <input type="date" name="checkin">
+            <input type="date" name="checkin" value="2018-01-01">
 
 
 
@@ -42,21 +42,21 @@
           <section>
 
 <label for="checkout">Salida</label>
-<input type="date" name="checkout">
+<input type="date" name="checkout" value="2018-01-08">
 
 
           </section>
 
           <section class="seccionocupacion">
             <label for="ocupacion">Ocupación</label>
-            <input type="text" name="ocupacion">
+            <input type="text" name="ocupacion" value="1x2">
 
 
           </section>
 
           <section class="seccionboton">
 
-<button type="button" name="button">Check</button>
+<button type="button" name="button" onclick="location='/reserva/#/available?checkin=' + checkin.value + '&checkout=' + checkout.value + '&ocupacion=' + ocupacion.value">Check</button>
 
 
           </section>

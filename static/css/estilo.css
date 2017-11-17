@@ -72,9 +72,6 @@ INICIO NAV
 
 
 nav {
-  /* fijamos arriba */
-  position: absolute;
-  top: 0px;
   width: 100%;
   border-bottom: 3px solid lightgrey;
   height: 60px;
@@ -356,5 +353,200 @@ section.ofertas, section.habitaciones, section.servicios {
 /*
 
 FIN OFERTAS
+
+*/
+
+
+/*
+
+INICIO RESERVA
+
+*/
+
+
+.ubicacionreserva {
+
+	padding-top: 40px;
+	padding-bottom: 40px;
+
+	width: 100%;
+	background-color: darkblue;
+	color: white;
+
+}
+
+.ubicacionreserva .cuerpo {
+  /* centramos todo */
+  margin: auto;
+  /* en el main todo está alineado a la izquierda */
+  text-align: left;
+  /* momo máximo 800px de ancho. Izquierda y derecha en blanco */
+  width: 800px;
+}
+
+.ubicacionreserva .cuerpo h1 {
+  font-size: 22px;
+}
+
+.ubicacionreserva .cuerpo p {
+	margin-top: 10px;
+  font-size: 12px;
+}
+
+
+
+/*
+
+FIN RESERVA
+
+*/
+
+/*
+
+INICIO CALENDARIO
+
+*/
+
+
+.calendario {
+	margin-top: 50px;
+	width: 100%;
+	display: flex;
+	border-left: 1px solid lightgrey;
+	border-bottom: 1px solid lightgrey;
+	border-right: 1px solid lightgrey;
+	border-radius: 3px;
+}
+
+#calendario p {
+	font-size: 12px;
+	color: darkblue;
+}
+
+.mes {
+
+	width: 50%;
+
+	padding: 10px;
+	box-sizing: border-box;
+
+	text-align: center;
+
+}
+
+.mes:nth-child(odd) {
+	border-top: 4px solid orange;
+}
+
+.mes:nth-child(odd) .r {
+	visibility: hidden;
+}
+
+.mes:nth-child(odd) .l:hover {
+	color: red;
+	cursor: pointer;
+}
+
+.mes:nth-child(even) {
+	border-top: 4px solid blue;
+}
+
+.mes:nth-child(even) .l {
+	visibility: hidden;
+}
+
+.mes:nth-child(even) .r:hover {
+	color: red;
+	cursor: pointer;
+}
+
+.cabeceracalendario {
+	display: flex;
+	justify-content: center;
+}
+
+.cabeceracalendario h5 {
+	padding-top: 5px;
+}
+
+
+.semana {
+	width: 100%;
+	display: flex;
+}
+
+
+.titulodia, .dia, .diaenblanco {
+	width: 14%;
+	text-align: center;
+	padding: 15px;
+	box-sizing: border-box;
+}
+
+
+.dia:hover {
+	background-color: lightgrey;
+}
+
+.na {
+	color: lightgrey;
+}
+
+.av {
+	color: green;
+}
+
+.marcado {
+	background-color: darkblue;
+	color: white;
+}
+
+
+
+
+/*
+
+FIN CALENDARIO
+
+*/
+
+
+/*
+
+INICIO LOADING
+
+*/
+
+
+.loading {
+  width: 100%;
+  height: 20px;
+  border: 1px solid #2980b9;
+  border-radius: 3px;
+  background-image:
+    repeating-linear-gradient(
+      -45deg,
+      #2980b9,
+      #2980b9 11px,
+      #eee 10px,
+      #eee 20px /* determines size */
+    );
+  background-size: 28px 28px;
+  animation: move .5s linear infinite;
+}
+
+@keyframes move {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 28px 0;
+  }
+}
+
+
+/*
+
+FIN LOADING
 
 */
