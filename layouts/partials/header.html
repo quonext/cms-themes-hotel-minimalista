@@ -1,0 +1,25 @@
+
+
+{{ $n := .File.TranslationBaseName }}
+
+
+<nav>
+
+<div class="navcontent">
+
+<h1>{{ .Site.Title }}</h1>
+
+<ul>
+  <li><a href="/" {{ if eq $n "_index" }} class="activo" {{ end }}>Home</a></li>
+  <li><a href="/ofertas/" {{ if eq $n "ofertas" }} class="activo" {{ end }}>Ofertas</a></li>
+  <li><a href="/habitaciones/" {{ if eq $n "habitaciones" }} class="activo" {{ end }}>Habitaciones</a></li>
+  <li><a href="/servicios/" {{ if eq $n "servicios" }} class="activo" {{ end }}>Servicios</a></li>
+  <li><a href="/fotos/" {{ if eq $n "fotos" }} class="activo" {{ end }}>Fotos</a></li>
+  <li><a href="/contacto/" {{ if eq $n "contacto" }} class="activo" {{ end }}>Contacto</a></li>
+  <li><a href="/reserva/" {{ if eq $n "reserva" }} class="activo" {{ end }}>Reserva</a></li>
+</ul>
+
+</div>
+
+
+</nav>

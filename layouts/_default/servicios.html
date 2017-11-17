@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+{{ partial "head.html" . }}
+
+</head>
+
+<body>
+
+{{ partial "header.html" . }}
+
+
+  <main>
+
+
+    <section class="servicios">
+
+
+        {{ range $.Page.Site.Data.todo.servicios }}
+
+        <article>
+
+          <img src="{{ .imagen }}" alt="">
+
+          <h1>{{.titulo}}</h1>
+
+          <p>{{ .texto }}</p>
+
+        </article>
+
+        {{ end }}
+
+      </section>
+
+
+  </main>
+
+{{ partial "footer.html" . }}
+
+
+</body>
+
+</html>

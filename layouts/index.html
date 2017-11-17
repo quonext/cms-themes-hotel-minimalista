@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+{{ partial "head.html" . }}
+
+</head>
+
+<body>
+
+{{ partial "header.html" . }}
+
+
+  <main>
+
+    <section>
+
+      <article class="mensajehome">
+
+        <h1>Bienvenido</h1>
+
+        <p>Tagline Lorem Ipsum</p>
+
+      </article>
+
+
+
+      <article class="inicioreserva">
+
+        <form action="#">
+
+          <section>
+
+            <label for="checkin">Entrada</label>
+            <input type="date" name="checkin">
+
+
+
+          </section>
+
+          <section>
+
+<label for="checkout">Salida</label>
+<input type="date" name="checkout">
+
+
+          </section>
+
+          <section class="seccionocupacion">
+            <label for="ocupacion">Ocupación</label>
+            <input type="text" name="ocupacion">
+
+
+          </section>
+
+          <section class="seccionboton">
+
+<button type="button" name="button">Check</button>
+
+
+          </section>
+
+
+        </form>
+
+
+
+      </article>
+
+
+    </section>
+
+    <section class="mensajes">
+
+      <article class="mensaje">
+        <h1>Mejor precio online</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin a turpis rutrum, rhoncus mi a, aliquet lectus. Morbi a leo felis. Proin blandit quis sem sed ullamcorper. In hac habitasse platea dictumst. Cras vitae fringilla nulla.</p>
+      </article>
+
+      <article class="mensaje">
+        <h1>Ventajas reserva online</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin a turpis rutrum, rhoncus mi a, aliquet lectus. </p>
+      </article>
+
+    </section>
+
+  </main>
+
+{{ partial "footer.html" . }}
+
+
+</body>
+
+</html>
