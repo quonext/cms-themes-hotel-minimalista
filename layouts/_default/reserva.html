@@ -12,7 +12,7 @@
 {{ partial "header.html" . }}
 <div id="app">
 
-  <section class="ubicacionreserva">
+  <section class="ubicacionreserva" v-show="paso != 4">
 
     <div class="cuerpo">
 
@@ -175,60 +175,42 @@
 
   <div id="resultados" v-if="dispo && haydispo && !calendario">
 
-  <hr>
+  <article class="disponible">
 
-  <table class="table" style="margin-top: 50px;margin-bottom: 50px;">
-    <thead>
-      <tr>
-        <th>Rooms</th>
-        <th>Board</th>
-        <th>Price</th>
-      </tr>
-    </thead>
-    <tbody>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Rooms</th>
+          <th>Board</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tbody>
 
-      <template v-for="hotel in dispo.hotels">
-        <template v-for="option in hotel.options">
-          <template v-for="price in option.prices">
+        <template v-for="hotel in dispo.hotels">
+          <template v-for="option in hotel.options">
+            <template v-for="price in option.prices">
 
-      <tr>
+        <tr class="lineadispo">
 
-        <td>{{ print "{{ option.distributionString }}" }}</td>
-        <td>{{ print "{{ price.boardBasisName }}" }}</td>
-        <td><button type="button" class="btn btn-primary" v-on:click="extrainfo(price)">{{ print "{{ price.netPrice.value }}  {{ price.netPrice.currencyIsoCode}}" }}</button></td>
+          <td>{{ print "{{ option.distributionString }}" }}</td>
+          <td>{{ print "{{ price.boardBasisName }}" }}</td>
+          <td><button type="button" class="btn btn-primary" v-on:click="extrainfo(price)">{{ print "{{ price.netPrice.value }}  {{ price.netPrice.currencyIsoCode}}" }}</button></td>
 
-      </tr>
+        </tr>
 
-          </template>
+            </template>
+        </template>
       </template>
-    </template>
 
-    </tbody>
-  </table>
-
+      </tbody>
+    </table>
 
 
-  <hr>
 
-  <!--
+  </article>
 
-  <nav aria-label="...">
-    <ul class="pagination">
-      <li class="page-item disabled">
-        <a class="page-link" href="#" tabindex="-1">Previous</a>
-      </li>
-      <li class="page-item"><a class="page-link" href="#">1</a></li>
-      <li class="page-item active">
-        <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="page-item"><a class="page-link" href="#">3</a></li>
-      <li class="page-item">
-        <a class="page-link" href="#">Next</a>
-      </li>
-    </ul>
-  </nav>
 
-  -->
 
   </div>
 
@@ -249,22 +231,20 @@
   </div>
 -->
 
-<div>
+  <article v-if="detalles" class="detalles">
 
-<h1>Step 2: Check important info, fill and book</h1>
 
-  <div v-if="detalles" class="row" style="margin-top: 50px;margin-bottom: 50px;">
 
-    <div class="col-12 col-lg-4 push-lg-8">
+    <aside class="info">
+
+      <section>
 
       <div v-for="r in detalles.remarks" v-bind:class="estiloaviso(r.type)" role="alert">
         {{ print "{{ r.text }}" }}
       </div>
 
-      </p>
 
 
-      <hr>
 
       <p>Cancellation costs</p>
 
@@ -285,83 +265,81 @@
         </tbody>
       </table>
 
+      </section>
 
-          </div>
+      <section>
 
-
-  <div class="col-12 col-lg-8 pull-lg-4">
-
-
-    <form>
-      <div class="form-group">
-        <label for="name">Your name</label>
-        <input type="text" class="form-control" id="name" placeholder="Enter your name" v-model="parametros.titular">
-      </div>
-      <div class="form-group">
-        <label for="name">Special requests</label>
-        <textarea class="form-control" id="name" placeholder="If you have any" v-model="parametros.comentarios"></textarea>
-      </div>
-      <!--
-      <router-link tag="button" type="button" class="btn btn-secondary" :to="{name: 'home'}">&lt;&lt; &nbsp;Search again</router-link>
-    -->
       <button type="button" class="btn btn-primary" v-on:click="book">Book</button>
-    </form>
+
+</section>
+
+    </aside>
 
 
-  </div>
 
-</div>
 
-</div>
+
+
+    <section class="formulario">
+
+
+      <form>
+
+        <label for="name">Your name</label>
+          <input type="text" class="form-control" id="name" placeholder="Enter your name" v-model="parametros.titular">
+
+
+          <label for="name">Special requests</label>
+          <textarea class="form-control" id="name" placeholder="If you have any" v-model="parametros.comentarios"></textarea>
+      </form>
+
+
+    </section>
+
+
+
+
+
+
+
+
+</article>
+
 </template>
 
 <template id="booked">
 
-  <div class="container text-center" style="padding-top: 60px">
+  <article class="confirmada">
+
+    <p>Su reserva ha sido realizada con el id <b>{{ print "{{ bookingId }}" }}</b> y se le ha enviado un email de confirmación.</p>
+
+    <p class="msg">Reserva Realizada <i>done</i></p>
 
 
+    <p>Gracias por confiar en nosotros.</p>
 
-      <i class="fa fa-check-circle" aria-hidden="true" style="color:green; font-size: 10em;"></i>
+  </article>
 
-
-      <p>Congratulations!</p>
-
-      <p>Your booking has been confirmed with id <b>{{ print "{{ bookingId }}" }}</b></p>
-
-<div style="margin-top: 130px;"></div>
-<!--
-
-      <p>
-        <router-link tag="button" type="button" class="btn btn-secondary" :to="{name: 'home'}">&lt;&lt; &nbsp;Search again</router-link>
-      </p>
--->
-
-  </div>
 
 </template>
 
 <template id="error">
 
-  <div class="container text-center" style="padding-top: 60px">
+  <article class="erroralconfirmar">
 
 
+      <p>Su reserva no se ha podido confirmar.</p>
 
-      <i class="fa fa-window-close" aria-hidden="true" style="color:red; font-size: 10em;"></i>
 
+      <p class="msg">Reserva fallida <i>clear</i></p>
 
-      <p>Oops!</p>
 
       <p>Something went wrong: <b>{{ print "{{ msg }}" }}</b></p>
 
-<div style="margin-top: 130px;"></div>
 
-<!--
-      <p>
-        <router-link tag="button" type="button" class="btn btn-secondary" :to="{name: 'home'}">&lt;&lt; &nbsp;Search again</router-link>
-      </p>
--->
+      <button type="button" name="button" onclick="history.go(-1);">Volver atrás</button>
 
-  </div>
+  </article>
 
 </template>
 
@@ -408,9 +386,9 @@ var _error = Vue.component(
       data.paso = 4;
       console.log(this.$route.params);
       data.msg = this.$route.params.msg;
+      console.log('data.msg=' + data.msg);
 
       data.posicion = 'Error al confirmar la reserva';
-      data.msg = '';
     }
   }
 )
@@ -422,7 +400,7 @@ var _booked = Vue.component(
         return data;
     },
     mounted() {
-      data.paso = 3;
+      data.paso = 4;
       console.log(this.$route.params);
       data.bookingId = this.$route.params.bookingId;
 

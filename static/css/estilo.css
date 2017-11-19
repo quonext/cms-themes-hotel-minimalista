@@ -73,8 +73,8 @@ INICIO NAV
 
 nav {
   width: 100%;
-  border-bottom: 3px solid lightgrey;
   height: 60px;
+	box-shadow: 0px 3px 3px lightgrey;
 }
 
 nav .navcontent {
@@ -155,11 +155,11 @@ home
 /* formulario */
 
 article.inicioreserva {
-  border: 1px solid darkgrey;
+  border: 1px solid lightgrey;
   border-radius: 4px;
   height: 96px;
   margin-top: 40px;
-
+	box-shadow: 0px 3px 3px lightgrey;
 }
 
 article.inicioreserva form {
@@ -548,5 +548,262 @@ INICIO LOADING
 /*
 
 FIN LOADING
+
+*/
+
+
+/*
+
+INICIO DISPO
+
+*/
+
+.disponible {
+
+	color: darkblue;
+
+	font-size: 12px;
+
+}
+
+.disponible table {
+	width: 100%;
+	margin-top: 50px;
+	margin-bottom: 50px;
+}
+
+
+.disponible tr {
+
+	height: 30px;
+
+}
+
+.disponible th {
+
+	font-weight: bold;
+
+}
+
+.disponible th:last-child {
+
+	text-align: center;
+
+}
+
+.lineadispo {
+
+	border-top: 1px solid grey;
+
+}
+
+.lineadispo td {
+		padding-top: 10px;
+		padding-bottom: 10px;
+		widh: 40%;
+}
+
+.lineadispo td:last-child {
+	width: 20%;
+	text-align: center;
+}
+
+
+.lineadispo button {
+	border: 1px solid darkblue;
+	border-radius: 25px;
+	background-color: white;
+	height: 25px;
+	width: 150px;
+	padding-left: 20px;
+	padding-right: 20px;
+	color: darkblue;
+	font-size: 14px;
+}
+
+.lineadispo button:hover {
+	background-color: darkblue;
+	color: white;
+}
+
+
+
+/*
+
+FIN DISPO
+
+*/
+
+
+/*
+
+INICIO DETALLES
+
+*/
+
+.detalles {
+	margin-top: 50px;
+	margin-bottom: 50px;
+	font-size: 12px;
+}
+
+.detalles > section {
+	width: 50%;
+	margin: auto;
+	padding-left: 30px;
+	padding-right: 30px;
+	box-sizing: border-box;
+}
+
+.detalles > section * {
+	width: 100%;
+	margin-top: 10px;
+}
+
+.detalles aside {
+	float: right;
+	width: 200px;
+	border: 1px solid darkblue;
+	border-radius: 3px;
+	position: relative;
+	right: -15	0px;
+}
+
+.detalles aside section {
+	padding: 10px;
+	box-sizing: border-box;
+}
+
+
+.detalles aside section:last-child {
+
+	background-color: darkblue;
+	padding: 0px;
+	height: 40px;
+
+}
+
+.detalles aside section:last-child button {
+	width: 100%;
+	height: 100%;
+	background-color: darkblue;
+	border: none;
+	color: white;
+}
+
+.detalles aside section:last-child button:hover {
+	background-color: blue;
+}
+
+.detalles input, .detalles textarea {
+	border: none;
+	border-bottom: 1px solid lightgrey;
+	margin-bottom: 20px;
+}
+
+
+.detalles input:focus, .detalles textarea:focus {
+	outline: none;
+	border-bottom: 2px solid red;
+}
+/*
+
+FIN DETALLES
+
+*/
+
+
+/*
+
+INICIO CONFIRMADA
+
+*/
+
+.confirmada {
+	margin-top: 50px;
+	margin-bottom: 50px;
+	text-align: center;
+	line-height: 30px;
+	font-size: 12px;
+	color: darkblue;
+}
+
+.confirmada .msg {
+	background-color: green;
+	border-radius: 30px;
+	font-size: 16px;
+	color: white;
+	width: 200px;
+	margin: auto;
+	padding: 10px;
+}
+
+
+.confirmada i {
+	font-size: 32px;
+	font-family: "Material Icons";
+	display: inline-block;
+	vertical-align: middle;
+	margin-top: -10px;
+}
+
+/*
+
+FIN CONFIRMADA
+
+*/
+
+/*
+
+INICIO ERROR
+
+*/
+
+.erroralconfirmar {
+	margin-top: 50px;
+	margin-bottom: 50px;
+	text-align: center;
+	line-height: 30px;
+	font-size: 12px;
+	color: darkblue;
+}
+
+.erroralconfirmar .msg {
+	background-color: red;
+	border-radius: 30px;
+	font-size: 16px;
+	color: white;
+	width: 200px;
+	margin: auto;
+	padding: 10px;
+}
+
+
+.erroralconfirmar i {
+	font-size: 32px;
+	font-family: "Material Icons";
+	display: inline-block;
+	vertical-align: middle;
+	margin-top: -3px;
+}
+
+
+.erroralconfirmar button {
+	margin-top: 30px;
+	background-color: darkblue;
+	color: white;
+	border: none;
+	border-radius: 3px;
+	padding: 10px;
+	width: 150px;
+}
+
+.erroralconfirmar button:hover {
+	background-color: blue;
+}
+
+/*
+
+FIN ERROR
 
 */
