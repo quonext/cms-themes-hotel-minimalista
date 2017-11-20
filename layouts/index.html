@@ -12,7 +12,7 @@
 {{ partial "header.html" . }}
 
 
-  <main>
+  <main class="home">
 
     <section>
 
@@ -67,6 +67,156 @@
 
 
       </article>
+
+      <section class="desplegables">
+
+
+        <article class="calendario">
+
+            <div class="mes">
+
+        <div class="cabeceracalendario">
+              <i class="material-icons md-36 l" v-on:click="iarames(mes, -1)">arrow_back</i><h5>{{ print "{{ mes.title }}" }}</h5><i class="material-icons md-36 r" v-on:click="iarames(mes, 0)">arrow_forward</i>
+        </div>
+
+              <div class="semana">
+                <div class="titulodia">Lu</div>
+                <div class="titulodia">Ma</div>
+                <div class="titulodia">Mi</div>
+                <div class="titulodia">Ju</div>
+                <div class="titulodia">Vi</div>
+                <div class="titulodia">Sá</div>
+                <div class="titulodia">Do</div>
+              </div>
+
+
+              <div class="semana">
+                <div class="diaenblanco"></div>
+                <div class="dia">1</div>
+                <div class="dia">2</div>
+                <div class="dia">3</div>
+                <div class="dia">4</div>
+                <div class="dia">5</div>
+                <div class="dia">6</div>
+            </div>
+
+            <div class="semana">
+              <div class="diaenblanco"></div>
+              <div class="dia">1</div>
+              <div class="dia">2</div>
+              <div class="dia">3</div>
+              <div class="dia">4</div>
+              <div class="dia">5</div>
+              <div class="dia">6</div>
+          </div>
+          <div class="semana">
+            <div class="diaenblanco"></div>
+            <div class="dia">1</div>
+            <div class="dia">2</div>
+            <div class="dia">3</div>
+            <div class="dia">4</div>
+            <div class="dia">5</div>
+            <div class="dia">6</div>
+        </div>
+        <div class="semana">
+          <div class="diaenblanco"></div>
+          <div class="dia">1</div>
+          <div class="dia">2</div>
+          <div class="dia">3</div>
+          <div class="dia">4</div>
+          <div class="dia">5</div>
+          <div class="dia">6</div>
+      </div>
+
+          </div>
+
+
+
+
+
+
+          <div class="mes">
+
+      <div class="cabeceracalendario">
+            <i class="material-icons md-36 l" v-on:click="iarames(mes, -1)">arrow_back</i><h5>{{ print "{{ mes.title }}" }}</h5><i class="material-icons md-36 r" v-on:click="iarames(mes, 0)">arrow_forward</i>
+      </div>
+
+            <div class="semana">
+              <div class="titulodia">Lu</div>
+              <div class="titulodia">Ma</div>
+              <div class="titulodia">Mi</div>
+              <div class="titulodia">Ju</div>
+              <div class="titulodia">Vi</div>
+              <div class="titulodia">Sá</div>
+              <div class="titulodia">Do</div>
+            </div>
+
+
+            <div class="semana">
+              <div class="diaenblanco"></div>
+              <div class="dia">1</div>
+              <div class="dia">2</div>
+              <div class="dia">3</div>
+              <div class="dia">4</div>
+              <div class="dia">5</div>
+              <div class="dia">6</div>
+          </div>
+
+          <div class="semana">
+            <div class="diaenblanco"></div>
+            <div class="dia">1</div>
+            <div class="dia">2</div>
+            <div class="dia">3</div>
+            <div class="dia">4</div>
+            <div class="dia">5</div>
+            <div class="dia">6</div>
+        </div>
+        <div class="semana">
+          <div class="diaenblanco"></div>
+          <div class="dia">1</div>
+          <div class="dia">2</div>
+          <div class="dia">3</div>
+          <div class="dia">4</div>
+          <div class="dia">5</div>
+          <div class="dia">6</div>
+      </div>
+      <div class="semana">
+        <div class="diaenblanco"></div>
+        <div class="dia">1</div>
+        <div class="dia">2</div>
+        <div class="dia">3</div>
+        <div class="dia">4</div>
+        <div class="dia">5</div>
+        <div class="dia">6</div>
+    </div>
+
+        </div>
+
+
+        </article>
+
+
+<article class="seleccionocupaciones">
+
+<section>
+  <h1>Adultos</h1>
+  <button href="#">-</button>
+  <span>1</span>
+  <button href="#">+</button>
+</section>
+
+<section>
+  <h1>Adultos</h1>
+  <button>-</button>
+  <span>1</span>
+  <button href="#">+</button>
+</section>
+
+</article>
+
+
+
+      </section>
 
 
     </section>

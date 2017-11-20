@@ -12,7 +12,23 @@
 {{ partial "header.html" . }}
 
 
-  <main>
+  <main class="mainservicios">
+
+<!--
+    <h1>{{ .Title }}</h1>
+-->
+    <section class="listado">
+
+  <ul>
+    {{ range $.Page.Site.Data.todo.servicios }}
+
+    <li>{{.titulo}}</li>
+
+            {{ end }}
+  </ul>
+
+
+      </section>
 
 
     <section class="servicios">

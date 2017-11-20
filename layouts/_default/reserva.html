@@ -133,6 +133,10 @@
 
 <article v-if="calendario" class="calendario">
 
+  <p>Haz click en las nuevas fechas de entrada y de salida y haz click en siguiente.</p>
+
+  <div class="divcalendario">
+
   <template v-for="mes in calendario.months">
     <div class="col-lg-6 mes">
 
@@ -161,12 +165,17 @@
   </div>
   </template>
 
+  </div>
+
+<p class="preciodesde">Precio a partir de <span class="precio">325.11</span> EUR</p>
+
+<button type="button" name="button">Siguiente</button>
 
 </article>
 
 
 
-<p>Haz click en las nuevas fechas de entrada y de salida.</p>
+
 
 
 
