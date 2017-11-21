@@ -615,7 +615,7 @@ var _calendario = Vue.component(
             console.log(response.data.hotels);
 
             var bestDeal = 'NOTAVAILABLE';
-            if (data.dispo.hotels.length > 0) bestDeal = response.data.hotels[0].bestDeal;
+            if (response.data.hotels.length > 0) bestDeal = response.data.hotels[0].bestDeal;
 
             if (bestDeal == 'NOTAVAILABLE') {
               $('.preciodesde').html('No disponible en estas fechas.');
