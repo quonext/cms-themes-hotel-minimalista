@@ -129,7 +129,11 @@ nav li a {
 	margin-left: 15px;
 }
 nav li a:hover {
-  color: #003366;
+  color: #426da9;
+}
+
+nav li a.activo, nav li a.activo:hover {
+  color: #426da9;
 }
 
 
