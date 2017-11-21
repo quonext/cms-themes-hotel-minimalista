@@ -12,7 +12,295 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 <link rel="stylesheet" href="/css/estilo.css">
+
+
+<script src="/node_modules/tether/dist/js/tether.min.js"></script>
+<script src="/node_modules/jquery/dist/jquery.slim.min.js"></script>
+
+
+<script src="/node_modules/axios/dist/axios.min.js"></script>
+<script src="/node_modules/vue/dist/vue.min.js"></script>
+<script src="/node_modules/vue-router/dist/vue-router.min.js"></script>
+
+<script>
+
+var initinicioreserva = function() {
+
+
+
+
+        $('.seccionfechas').click(function(e) {
+          var d = new Date($('#checkin').val());
+          console.log(d);
+          if (!d) d = new Date();
+          d.setHours(0);
+          d.setMinutes(0);
+          cal.entrada = d;
+
+          var d = new Date($('#checkout').val());
+          console.log(d);
+          if (!d) d = new Date();
+          d.setHours(0);
+          d.setMinutes(0);
+          cal.salida = d;
+
+
+          cal.init(new Date(cal.entrada));
+
+          $('.calendario').css('visibility', ($('.calendario').css('visibility') == 'visible') ? 'hidden' : 'visible');
+        });
+
+        $('.seccionocupacion').click(function(e) {
+          $('.seleccionocupaciones').css('visibility', ($('.seleccionocupaciones').css('visibility') == 'visible') ? 'hidden' : 'visible');
+        });
+
+
+
+
+        cal = {
+          fechainicial: null,
+          inicioseleccion: null,
+          finseleccion: null,
+          entrada: null,
+          salida: null,
+          dias: [],
+          edias: [],
+          totalnoches: null,
+          init: function(desdefecha) {
+            console.log(desdefecha);
+            /*
+            desdefecha.setHours(3);
+            console.log(desdefecha);
+            console.log(hourOffset);
+            desdefecha.setHours( desdefecha.getHours() + hourOffset );
+            console.log(desdefecha);
+            */
+            var hourOffset = desdefecha.getTimezoneOffset() / 60;
+            desdefecha.setHours(0);
+            desdefecha.setMinutes(0);
+            this.fechainicial = desdefecha;
+            this.inicioseleccion = null;
+            this.finseleccion = null;
+            this.dias = [];
+            this.edias = [];
+            posdia = 0;
+
+            var d = this.fechainicial;
+
+            for (var m = 0; m < 2; m++) {
+              var em = $('.mes')[m];
+              d.setDate(1);
+              var mx = d.getMonth();
+              $('.titulomes' + m).html('' + (mx + 1) + ' / ' + (1900 + d.getYear()));
+              var posd = 0;
+              while (posd < d.getDay() - 1) {
+                var x = $('#dia_' + m + '_' + posd++);
+                x.html('');
+                x.attr('class', 'dia');
+              }
+              while (d.getMonth() == mx) {
+                var x = $('#dia_' + m + '_' + posd++);
+                x.attr('data-indice', posdia);
+                x.attr('data-fecha', d);
+                if (this.entrada && d.getTime() == this.entrada.getTime()) {
+                  this.inicioseleccion = x;
+                } else if (this.salida && d.getTime() == this.salida.getTime()) {
+                  this.finseleccion = x;
+                }
+                this.dias[posdia] = d;
+                this.edias[posdia++] = x;
+                x.html(d.getDate());
+                d = new Date(d);
+                d.setDate(d.getDate() + 1);
+              }
+              while (posd < 42) {
+                var x = $('#dia_' + m + '_' + posd++);
+                x.html('');
+                x.attr('class', 'dia');
+              }
+            }
+
+            this.refrescarseleccion();
+
+          },
+          hover: function(e, elem) {
+            //elem.addClass('salida');
+          },
+          refrescarseleccion: function() {
+            var estancia = false;
+            this.totalnoches = 0;
+            for (var posd = 0; posd < this.dias.length; posd++) {
+              if (this.entrada && this.dias[posd].getTime() == this.entrada.getTime()) {
+                this.edias[posd].removeClass('estancia');
+                this.edias[posd].removeClass('salida');
+                this.edias[posd].addClass('entrada');
+                if (this.salida != null && this.entrada != this.salida) {
+                  estancia = true;
+                  this.totalnoches++;
+                }
+              } else if (this.salida && this.dias[posd].getTime() == this.salida.getTime()) {
+                estancia = false;
+                this.edias[posd].removeClass('estancia');
+                this.edias[posd].removeClass('entrada');
+                this.edias[posd].addClass('salida');
+              } else if (estancia) {
+                this.edias[posd].removeClass('salida');
+                this.edias[posd].removeClass('entrada');
+                this.edias[posd].addClass('estancia');
+                this.totalnoches++;
+              } else {
+                this.edias[posd].removeClass('estancia');
+                this.edias[posd].removeClass('entrada');
+                this.edias[posd].removeClass('salida');
+              }
+            }
+            $('.footercalendario').html(this.totalnoches + ' noches');
+            this.uploadentrada(this.entrada);
+            this.uploadsalida(this.salida);
+          },
+          click: function(e, elem) {
+            if (this.inicioseleccion != null && this.finseleccion != null) {
+              this.inicioseleccion = elem;
+              this.finseleccion = null;
+            } else if (this.inicioseleccion != null) {
+              this.finseleccion = elem;
+            } else {
+              this.inicioseleccion = elem;
+            }
+            this.entrada = null;
+            this.salida = null;
+            if (this.inicioseleccion != null) {
+              var i = parseInt(this.inicioseleccion.attr('data-indice'));
+              this.entrada = this.dias[i];
+            }
+            if (this.finseleccion != null) {
+              var i = parseInt(this.finseleccion.attr('data-indice'));
+              this.salida = this.dias[i];
+            }
+
+            if (this.entrada != null && this.salida != null) {
+              if (this.entrada > this.salida) {
+                var aux = this.entrada;
+                this.entrada = this.salida;
+                this.salida = aux;
+              } else if (this.entrada > this.salida) {
+                this.salida = null;
+                this.finseleccion = null;
+              }
+              $('.calendario').css('visibility', ($('.calendario').css('visibility') == 'visible') ? 'hidden' : 'visible');
+            }
+            this.refrescarseleccion();
+          },
+          setentrada(d) {
+            this.inicioseleccion = this.edia[this.dias.indexOf(d)];
+            refrescarseleccion();
+          },
+          setsalida(d) {
+            this.finseleccion = this.edia[this.dias.indexOf(d)];
+            refrescarseleccion();
+          },
+          uploadentrada: function(d) {},
+          uploadsalida: function(d) {}
+
+        }
+
+
+        $('.dia').click(function(e) {
+          cal.click(e, $(this));
+        });
+
+        $('.dia').mouseover(function(e) {
+          cal.hover(e, $(this));
+        });
+
+        $('.l').click(function(e) {
+          cal.fechainicial.setMonth(cal.fechainicial.getMonth() - 1)
+          cal.init(cal.fechainicial);
+        });
+
+        $('.r').click(function(e) {
+          cal.fechainicial.setMonth(cal.fechainicial.getMonth() + 1);
+          cal.init(cal.fechainicial);
+        });
+
+        cal.init(new Date());
+
+        cal.uploadentrada = function(d) {
+          if (d) {
+            var mz = d.getMonth() + 1;
+            var dz = d.getDate();
+            $('#checkin').val((1900 + d.getYear()) + '-' + ((mz < 10) ? '0' : '') + mz + '-' + ((dz < 10) ? '0' : '') + dz);
+          } else {
+            $('#checkin').val('');
+          }
+        };
+
+        cal.uploadsalida = function(d) {
+          if (d) {
+            var mz = d.getMonth() + 1;
+            var dz = d.getDate();
+            $('#checkout').val((1900 + d.getYear()) + '-' + ((mz < 10) ? '0' : '') + mz + '-' + ((dz < 10) ? '0' : '') + dz);
+          } else {
+            $('#checkout').val('');
+          }
+        };
+
+
+
+
+
+
+
+
+
+
+        $('#divocupaciones').on('click', '.eliminarocupacion', function(e) {
+          if ($('#divocupaciones').children('.ocupacion').length == 1) {
+            alert('You must leave at least 1 occupation');
+          } else {
+            $(this).parents('.ocupacion').remove();
+          }
+
+        });
+
+        $('#addocupacion').on('click', function(e) {
+          $('#divocupaciones').append($('#templateocupacion').children('.ocupacion').first().clone());
+        });
+
+        $('#setocupacion').on('click', function(e) {
+          var s = '';
+          $('#divocupaciones').children('.ocupacion').each(function(i) {
+
+            var a = $(this).find('.habitaciones');
+            var b = $(this).find('.pax');
+            var c = $(this).find('.edades');
+            console.log(a.html());
+            if (a.val() != '0') {
+              if (s != '') s += ',';
+              s += '' + a.val() + 'x' + b.val();
+
+              if (c.val().trim() != '') {
+                var y = c.val().split(/[\s,]+/);
+                for (var q = 0; q < y.length; q++) {
+                  var e = parseInt(y[q]);
+                  if (!isNaN(e)) s += '-' + y[q];
+                }
+              }
+
+            }
+
+          });
+          $('#ocupacion').val(s);
+          $('.seleccionocupaciones').css('visibility', 'hidden');
+
+
+        });
+
+
+}
+
+</script>

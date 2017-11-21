@@ -50,7 +50,7 @@ table {
 
 /* FIN RESET */
 
-body, input {
+body, input, button {
   font-family: 'Roboto';font-size: 16px;
 }
 
@@ -167,29 +167,67 @@ INICIO HOME
 
 /* zona para los deplegables */
 
-.desplegables {
-	height: 200px;
+	.desplegables {
+	height: 230px;
 	display: flex;
 }
 
 
 /* calendario */
 
-.home .calendario {
+.home .calendario, .divhomereserva .calendario {
 	width: 50%;
 	font-size: 12px;
 	margin-top: 0px;
-	height: 150px;
+	height: 206px;
 	box-shadow: 0px 3px 3px lightgrey;
+	visibility: hidden;
 }
 
-.home .calendario .titulodia {
+.home .divcalendario, .divhomereserva .divcalendario{
+	border: none;
+}
+
+.home .calendario .titulodia, .divhomereserva .calendario .titulodia {
 	padding: 3px;
 	font-weight: bold;
 }
 
-.home .calendario .dia, .home .calendario .diaenblanco {
+.home .calendario .dia, .home .calendario .diaenblanco, .divhomereserva .calendario .dia, .divhomereserva .calendario .diaenblanco {
 	padding: 3px;
+	cursor: pointer;
+	line-height: 18px;
+}
+
+.home .calendario .estancia, .divhomereserva .calendario .estancia {
+	background-color: #e5e5e5;
+}
+
+.home .calendario .entrada, .divhomereserva .calendario .entrada {
+	background-color: darkblue;
+	color: white;
+	border-top-left-radius: 4px;
+	border-bottom-left-radius: 4px;
+}
+
+.home .calendario .salida, .divhomereserva .calendario .salida {
+	background-color: orange;
+	color: white;
+	border-top-right-radius: 4px;
+	border-bottom-right-radius: 4px;
+}
+
+.home .calendario .mes .semana .dia:hover, .divhomereserva .calendario .mes .semana .dia:hover {
+	background-color: none;
+}
+
+.home .calendario .footercalendario, .divhomereserva .calendario .footercalendario {
+	text-align: center;
+	width: 100%;
+}
+
+.home .calendario .mes , .divhomereserva .calendario .mes {
+	padding-bottom: 0px;
 }
 
 
@@ -264,19 +302,25 @@ article.inicioreserva section button:hover {
 /* selector ocupaciones */
 
 .seleccionocupaciones {
-	width: 25%;
+	width: 40%;
 	padding: 20px;
 	box-sizing: border-box;
 	border: 1px solid lightgrey;
-	height: 100px;
 	box-shadow: 0px 3px 3px lightgrey;
-	margin-top: -1px;
+	margin-top: 0px;
 	background-color: white;
 	font-size: 12px;
+	border-top: 4px solid darkblue;
+	visibility: hidden;
 }
 
 .seleccionocupaciones section {
 	display: flex;
+	margin-bottom: 10px;
+}
+
+.seleccionocupaciones section * {
+	vertical-align: middle;
 }
 
 .seleccionocupaciones section h1 {
@@ -284,13 +328,25 @@ article.inicioreserva section button:hover {
 }
 
 .seleccionocupaciones section button {
-	width: 10%;
+	width: 1.5em;
 	border: none;
-	background-color: darkblue;
+	background-color: red;
+	color: white;
+	border-radius: 1.5em;
+	padding: 0px;
+	margin: 0px;
+	width: 2.5em;
+	line-height: 12px;
+	cursor: pointer;
+}
+
+.seleccionocupaciones section button:hover {
+	background-color: orange;
 }
 
 .seleccionocupaciones section span {
-	width: 10%;
+	width: 20%;
+	text-align: center;
 }
 
 
@@ -418,7 +474,7 @@ section.ofertas, section.habitaciones, section.servicios {
 
 .mainservicios {
 	display: flex;
-	max-width: 900px;
+	max-width: 1100px;
 }
 
 .mainservicios h1 {
@@ -474,6 +530,80 @@ section.ofertas, section.habitaciones, section.servicios {
 /*
 
 FIN OFERTAS
+
+*/
+
+/*
+
+INICIO CONTACTO
+
+*/
+
+.maincontacto {
+	color: darkblue;
+	margin-top: 30px;
+	max-width: 1100px;
+}
+
+.maincontacto > section {
+	display: flex;
+	margin-top: 30px;
+}
+
+.maincontacto h1 {
+	width: 100%;
+	text-align: center;
+	font-weight: bold;
+	font-size: 22px;
+	margin-bottom: 20px;
+}
+
+
+.maincontacto article {
+	width: 50%;
+	padding: 20px;
+	padding-top: 5px;
+}
+
+.maincontacto article h1 {
+	width: 100%;
+	font-size: 16px;
+}
+
+.maincontacto article ul {
+	margin-top: 40px;
+	line-height: 22px;
+}
+
+.maincontacto article ul li * {
+	margin-top: 10px;
+	display: inline-block;
+}
+
+.maincontacto article ul li h1 {
+	width: 30%;
+	font-weight: bold;
+	font-size: 14px;
+	margin-bottom: 20px;
+	text-align: left;
+	font-weight: bold;
+}
+
+.maincontacto article ul li p {
+	width: 69%;
+	font-size: 14px;
+	padding-bottom: 20px;
+	border-bottom: 1px solid lightgrey;
+}
+
+.maincontacto article ul li:last-child p {
+	border-bottom: none;
+}
+
+
+/*
+
+FIN CONTACTO
 
 */
 
@@ -548,9 +678,15 @@ INICIO CALENDARIO
 	border-right: 1px solid lightgrey;
 }
 
+
+.calendario .pie {
+	display: flex;
+	margin-top: 20px;
+}
+
 .calendario .preciodesde  {
-	padding-top: 16px;
-	width: 240px;
+	padding-top: 5px;
+	padding-left: 128px;
 	font-size: 16px;
 	margin: auto;
 }
@@ -562,7 +698,6 @@ INICIO CALENDARIO
 
 .calendario button {
 	float: right;
-	margin-top: -26px;
 	border: none;
 	background-color: darkblue;
 	padding: 10px;
@@ -589,7 +724,7 @@ INICIO CALENDARIO
 }
 
 .mes:nth-child(odd) {
-	border-top: 4px solid orange;
+	border-top: 4px solid blue;
 }
 
 .mes:nth-child(odd) .r {
@@ -602,7 +737,7 @@ INICIO CALENDARIO
 }
 
 .mes:nth-child(even) {
-	border-top: 4px solid blue;
+	border-top: 4px solid orange;
 }
 
 .mes:nth-child(even) .l {
@@ -621,6 +756,10 @@ INICIO CALENDARIO
 
 .cabeceracalendario h5 {
 	padding-top: 5px;
+}
+
+.cabeceracalendario i {
+	font-size: 16px;
 }
 
 
@@ -653,6 +792,24 @@ INICIO CALENDARIO
 .marcado {
 	background-color: darkblue;
 	color: white;
+}
+
+.estancia {
+	background-color: #e5e5e5;
+}
+
+.entrada {
+	background-color: darkblue;
+	color: white;
+	border-top-left-radius: 4px;
+	border-bottom-left-radius: 4px;
+}
+
+.salida {
+	background-color: orange;
+	color: white;
+	border-top-right-radius: 4px;
+	border-bottom-right-radius: 4px;
 }
 
 
@@ -768,7 +925,7 @@ INICIO DISPO
 	border-radius: 25px;
 	background-color: white;
 	height: 25px;
-	width: 150px;
+	width: 120px;
 	padding-left: 20px;
 	padding-right: 20px;
 	color: darkblue;

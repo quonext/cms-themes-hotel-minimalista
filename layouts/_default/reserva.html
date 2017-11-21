@@ -3,7 +3,7 @@
 
 <head>
 
-{{ partial "head-reserva.html" . }}
+{{ partial "head.html" . }}
 
 </head>
 
@@ -45,67 +45,27 @@
 <template id="home">
 
 
-
-
-  <article class="inicioreserva">
-
-    <form action="/reserva/#/available">
-
-      <section>
-
-        <label for="checkin">Entrada</label>
-        <input type="date" name="checkin" value="2018-01-01">
+  <div class="divhomereserva">
 
 
 
-      </section>
-
-      <section>
-
-<label for="checkout">Salida</label>
-<input type="date" name="checkout" value="2018-01-08">
-
-
-      </section>
-
-      <section class="seccionocupacion">
-        <label for="ocupacion">Ocupación</label>
-        <input type="text" name="ocupacion" value="1x2">
-
-
-      </section>
-
-      <section class="seccionboton">
-
-<button type="button" name="button" onclick="location='/reserva/#/available?checkin=' + checkin.value + '&checkout=' + checkout.value + '&ocupacion=' + ocupacion.value">Check</button>
-
-
-      </section>
-
-
-    </form>
-
-
-
-  </article>
+  {{ partial "inicioreserva.html" . }}
 
 
       <!-- mensajes adicionales -->
 
-      <div class="row marketing" v-show="nohabuscado">
+      <section class="mensajes">
 
         {{ range $.Page.Site.Data.todo.reserva.mensajes }}
 
-        <div class="col-lg-6">
-          <h4>{{ .titulo }}</h4>
+        <article class="mensaje">
+          <h1>{{ .titulo }}</h1>
           <p>{{ .texto }}</p>
-        </div>
+        </article>
 
         {{ end }}
 
-      </div>
-
-
+      </section>
 
 
 </div>
@@ -167,9 +127,13 @@
 
   </div>
 
-<p class="preciodesde">Precio a partir de <span class="precio">325.11</span> EUR</p>
+<div class="pie">
 
-<button type="button" name="button">Siguiente</button>
+
+  <p class="preciodesde"> </p>
+
+  <button type="button" name="button" v-on:click="siguiente">Siguiente</button>
+</div>
 
 </article>
 
@@ -372,6 +336,7 @@ var data = {
   dispo: null,
   calendario: null,
   calendariodia: null,
+  calendariodia: null,
   detalles: null,
   resultado: null,
   bookingId: null,
@@ -420,6 +385,8 @@ var _booked = Vue.component(
   }
 )
 
+var cal;
+
 var _home = Vue.component(
   'home', {
     template: '#home',
@@ -431,95 +398,17 @@ var _home = Vue.component(
         console.log('buscar!');
         this.$router.push({ name: 'available', query: {checkin: data.parametros.checkin, checkout: data.parametros.checkout, ocupacion: data.parametros.ocupacion} });
         console.log('pushed!');
+      },
+      clickonseccionocupacion: function() {
+        console.log($('.seleccionocupaciones').html());
+        $('.seleccionocupaciones').css('visibility', ($('.seleccionocupaciones').css('visibility') == 'visible') ? 'hidden' : 'visible');
       }
     },
     mounted () {
       data.paso = 0;
 
-      console.log( "ready!" );
 
-      // $('#cambiarocupacion').on('click', function(e) {
-      //   console.log('clicked');
-      // });
-
-      $('#exampleModalLive').on('show.bs.modal', function () {
-        console.log('modal');
-
-        $('#divocupaciones').hide();
-        $('#divocupaciones').html('');
-
-
-        var a = data.parametros.ocupacion.split(',');
-        for (var b = 0; b < a.length; b++) {
-          var c = a[b];
-          var d = c.split('x');
-          var habs = d[0];
-
-          var e = d[1].split('-');
-          var pax = e[0];
-          var edades = '';
-          for (var f = 1; f < e.length; f++) {
-            if (edades != '') edades += ' ';
-            edades += e[f];
-          }
-
-          $('#divocupaciones').append($('#templateocupacion').children('.ocupacion').first().clone());
-          var elem = $('#divocupaciones').children('.ocupacion').last();
-          var xa = elem.find('.habitaciones');
-          var xb = elem.find('.pax');
-          var xc = elem.find('.edades');
-
-          xa.val(habs);
-          xb.val(pax);
-          xc.val(edades);
-
-        }
-
-        $('#divocupaciones').show();
-
-      })
-
-      $('#exampleModalLive').on('hide.bs.modal', function () {
-        console.log('modal');
-//$('#myInput').trigger('focus')
-        var s = '';
-        $('#divocupaciones').children('.ocupacion').each(function(i) {
-
-          var a = $(this).find('.habitaciones');
-          var b = $(this).find('.pax');
-          var c = $(this).find('.edades');
-          console.log(a.html());
-          if (a.val() != '0') {
-            if (s != '') s += ',';
-            s += '' + a.val() + 'x' + b.val();
-
-            if (c.val().trim() != '') {
-              var y = c.val().split(/[\s,]+/);
-              for (var q = 0; q < y.length; q++) {
-                var e = parseInt(y[q]);
-                 if (!isNaN(e)) s += '-' + y[q];
-              }
-            }
-
-          }
-
-        });
-        Vue.set(data.parametros, 'ocupacion', s);
-      })
-
-
-      $('#divocupaciones').on('click', '.eliminarocupacion', function(e) {
-          if ($('#divocupaciones').children('.ocupacion').length == 1) {
-              alert('You must leave at least 1 occupation');
-          } else {
-              $(this).parents('.ocupacion').remove();
-          }
-
-      });
-
-      $('#addocupacion').on('click', function(e) {
-          $('#divocupaciones').append($('#templateocupacion').children('.ocupacion').first().clone());
-      });
+      initinicioreserva();
 
     }
   }
@@ -539,27 +428,6 @@ var _available = Vue.component(
         this.$router.push({ name: 'available', query: {checkin: data.parametros.checkin, checkout: data.parametros.checkout, ocupacion: data.parametros.ocupacion} });
         this.disporx();
         console.log('pushed!');
-      },
-
-      seldia: function(dia) {
-        console.log('seldia ' + dia);
-        if (data.calendariodia) {
-          if (dia.id < data.calendariodia.id) {
-            al = data.calendariodia.date;
-            del = dia.date;
-          } else {
-            del = data.calendariodia.date;
-            al = dia.date;
-          }
-
-          this.$router.push({ name: 'available', query: {checkin: del, checkout: al, ocupacion: data.parametros.ocupacion} });
-          // data.parametros.checkin = del;
-          // data.parametros.checkout = al;
-          // this.disporx();
-        } else {
-          data.calendariodia = dia;
-          $('#dia_' + dia.id).addClass('marcado');
-        }
       },
 
       disporx: function() {
@@ -587,11 +455,11 @@ var _available = Vue.component(
         data.dispo = response.data;
         data.msg = response.data.msg;
         console.log(data.msg);
-        data.haydispo = data.dispo.hotels.length > 0;
+        data.haydispo = data.dispo.hotels.length > 0 && data.dispo.hotels[0].bestDeal != 'NOTAVAILABLE';
 
         if (!data.haydispo) {
           data.buscando = true;
-          zzz.$router.push({ name: 'calendario', query: {checkin: data.parametros.checkin, checkout: data.parametros.checkout, ocupacion: data.parametros.ocupacion} });
+          zzz.$router.replace({ name: 'calendario', query: {checkin: data.parametros.checkin, checkout: data.parametros.checkout, ocupacion: data.parametros.ocupacion} });
         }
         //Vue.set(vm, 'dispo.data', response.data)
         })
@@ -669,22 +537,119 @@ var _calendario = Vue.component(
 
       seldia: function(dia) {
         console.log('seldia ' + dia);
+        var del;
+        var al;
+        if (data.calendariodia && data.calendariodia2) {
+          data.calendariodia = null;
+          data.calendariodia2 = null;
+        }
         if (data.calendariodia) {
-          if (dia.id < data.calendariodia.id) {
+          data.calendariodia2 = dia;
+          if (data.calendariodia2.id < data.calendariodia.id) {
             al = data.calendariodia.date;
-            del = dia.date;
+            del = data.calendariodia2.date;
           } else {
             del = data.calendariodia.date;
-            al = dia.date;
+            al = data.calendariodia2.date;
           }
 
-          this.$router.push({ name: 'available', query: {checkin: del, checkout: al, ocupacion: data.parametros.ocupacion} });
           // data.parametros.checkin = del;
           // data.parametros.checkout = al;
           // this.disporx();
         } else {
           data.calendariodia = dia;
-          $('#dia_' + dia.id).addClass('marcado');
+          del = dia.date;
+          //$('#dia_' + dia.id).addClass('marcado');
+        }
+
+        // reset clases dias
+        //$('.dia').attr('class', 'dia');
+        $('.dia').removeClass('entrada').removeClass('salida').removeClass('estancia');
+        // del siempre existe
+        var d = new Date(del);
+        var mz = d.getMonth() + 1;
+        var dz = d.getDate();
+        var id = '' + (1900 + d.getYear()) + ((mz < 10) ? '0' : '') + mz + ((dz < 10) ? '0' : '') + dz;
+        var edel = $('#dia_' + id);
+        edel.addClass('entrada');
+
+        if (al) {
+
+          var limite = new Date(al);
+          while (d < limite) {
+            console.log(d);
+            var mz = d.getMonth() + 1;
+            var dz = d.getDate();
+            var id = '' + (1900 + d.getYear()) + ((mz < 10) ? '0' : '') + mz + ((dz < 10) ? '0' : '') + dz;
+            var edel = $('#dia_' + id);
+            edel.addClass('estancia');
+
+            d.setDate(d.getDate() + 1);
+          }
+
+          var d = new Date(al);
+          var mz = d.getMonth() + 1;
+          var dz = d.getDate();
+          var id = '' + (1900 + d.getYear()) + ((mz < 10) ? '0' : '') + mz + ((dz < 10) ? '0' : '') + dz;
+          var edel = $('#dia_' + id);
+          edel.addClass('salida');
+
+
+          // buscamos dispo y actualizamos precio
+
+          data.buscando = true;
+          axios({
+          method: 'get',
+          url: data.baseurl + '/hotel/available',
+          params: {
+            resorts: data.parametros.resort,
+            checkin: del.replace(/-/g, ""),
+            checkout: al.replace(/-/g, ""),
+            occupancies: data.parametros.ocupacion,
+            incudestaticinfo: false,
+          }
+          })
+          .then(function (response) {
+            data.buscando = false;
+            console.log(response.data);
+            console.log(response.data.hotels);
+
+            var bestDeal = response.data.hotels[0].bestDeal;
+
+            if (bestDeal == 'NOTAVAILABLE') {
+              $('.preciodesde').html('No disponible en estas fechas.');
+            } else {
+              $('.preciodesde').html('Disponible a partir de <span class="precio">' + bestDeal + '</span>.');
+            }
+
+          })
+          .catch(function (error) {
+            data.buscando = false;
+            console.log(error);
+          });
+
+
+
+        }
+
+
+
+      },
+
+      siguiente: function() {
+        var del;
+        var al;
+        if (data.calendariodia && data.calendariodia2) {
+          if (data.calendariodia2.id < data.calendariodia.id) {
+            al = data.calendariodia.date;
+            del = data.calendariodia2.date;
+          } else {
+            del = data.calendariodia.date;
+            al = data.calendariodia2.date;
+          }
+        }
+        if (del && al) {
+          this.$router.push({ name: 'available', query: {checkin: del, checkout: al, ocupacion: data.parametros.ocupacion} });
         }
       },
 
@@ -693,6 +658,7 @@ var _calendario = Vue.component(
 
         data.calendario = null;
         data.calendariodia = null;
+        data.calendariodia2 = null;
         axios({
         method: 'get',
         url: data.baseurl + '/cms/hotelavailabilitycalendar',

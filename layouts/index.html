@@ -3,13 +3,13 @@
 
 <head>
 
-{{ partial "head.html" . }}
+  {{ partial "head.html" . }}
 
 </head>
 
 <body>
 
-{{ partial "header.html" . }}
+  {{ partial "header.html" . }}
 
 
   <main class="home">
@@ -25,219 +25,30 @@
       </article>
 
 
-
-      <article class="inicioreserva">
-
-        <form action="/reserva/#/available">
-
-          <section>
-
-            <label for="checkin">Entrada</label>
-            <input type="date" name="checkin" value="2018-01-01">
+      {{ partial "inicioreserva.html" . }}
 
 
+      <script>
+        initinicioreserva();
+      </script>
 
-          </section>
+      <section class="mensajes">
 
-          <section>
-
-<label for="checkout">Salida</label>
-<input type="date" name="checkout" value="2018-01-08">
-
-
-          </section>
-
-          <section class="seccionocupacion">
-            <label for="ocupacion">Ocupación</label>
-            <input type="text" name="ocupacion" value="1x2">
-
-
-          </section>
-
-          <section class="seccionboton">
-
-<button type="button" name="button" onclick="location='/reserva/#/available?checkin=' + checkin.value + '&checkout=' + checkout.value + '&ocupacion=' + ocupacion.value">Check</button>
-
-
-          </section>
-
-
-        </form>
-
-
-
-      </article>
-
-      <section class="desplegables">
-
-
-        <article class="calendario">
-
-            <div class="mes">
-
-        <div class="cabeceracalendario">
-              <i class="material-icons md-36 l" v-on:click="iarames(mes, -1)">arrow_back</i><h5>{{ print "{{ mes.title }}" }}</h5><i class="material-icons md-36 r" v-on:click="iarames(mes, 0)">arrow_forward</i>
-        </div>
-
-              <div class="semana">
-                <div class="titulodia">Lu</div>
-                <div class="titulodia">Ma</div>
-                <div class="titulodia">Mi</div>
-                <div class="titulodia">Ju</div>
-                <div class="titulodia">Vi</div>
-                <div class="titulodia">Sá</div>
-                <div class="titulodia">Do</div>
-              </div>
-
-
-              <div class="semana">
-                <div class="diaenblanco"></div>
-                <div class="dia">1</div>
-                <div class="dia">2</div>
-                <div class="dia">3</div>
-                <div class="dia">4</div>
-                <div class="dia">5</div>
-                <div class="dia">6</div>
-            </div>
-
-            <div class="semana">
-              <div class="diaenblanco"></div>
-              <div class="dia">1</div>
-              <div class="dia">2</div>
-              <div class="dia">3</div>
-              <div class="dia">4</div>
-              <div class="dia">5</div>
-              <div class="dia">6</div>
-          </div>
-          <div class="semana">
-            <div class="diaenblanco"></div>
-            <div class="dia">1</div>
-            <div class="dia">2</div>
-            <div class="dia">3</div>
-            <div class="dia">4</div>
-            <div class="dia">5</div>
-            <div class="dia">6</div>
-        </div>
-        <div class="semana">
-          <div class="diaenblanco"></div>
-          <div class="dia">1</div>
-          <div class="dia">2</div>
-          <div class="dia">3</div>
-          <div class="dia">4</div>
-          <div class="dia">5</div>
-          <div class="dia">6</div>
-      </div>
-
-          </div>
-
-
-
-
-
-
-          <div class="mes">
-
-      <div class="cabeceracalendario">
-            <i class="material-icons md-36 l" v-on:click="iarames(mes, -1)">arrow_back</i><h5>{{ print "{{ mes.title }}" }}</h5><i class="material-icons md-36 r" v-on:click="iarames(mes, 0)">arrow_forward</i>
-      </div>
-
-            <div class="semana">
-              <div class="titulodia">Lu</div>
-              <div class="titulodia">Ma</div>
-              <div class="titulodia">Mi</div>
-              <div class="titulodia">Ju</div>
-              <div class="titulodia">Vi</div>
-              <div class="titulodia">Sá</div>
-              <div class="titulodia">Do</div>
-            </div>
-
-
-            <div class="semana">
-              <div class="diaenblanco"></div>
-              <div class="dia">1</div>
-              <div class="dia">2</div>
-              <div class="dia">3</div>
-              <div class="dia">4</div>
-              <div class="dia">5</div>
-              <div class="dia">6</div>
-          </div>
-
-          <div class="semana">
-            <div class="diaenblanco"></div>
-            <div class="dia">1</div>
-            <div class="dia">2</div>
-            <div class="dia">3</div>
-            <div class="dia">4</div>
-            <div class="dia">5</div>
-            <div class="dia">6</div>
-        </div>
-        <div class="semana">
-          <div class="diaenblanco"></div>
-          <div class="dia">1</div>
-          <div class="dia">2</div>
-          <div class="dia">3</div>
-          <div class="dia">4</div>
-          <div class="dia">5</div>
-          <div class="dia">6</div>
-      </div>
-      <div class="semana">
-        <div class="diaenblanco"></div>
-        <div class="dia">1</div>
-        <div class="dia">2</div>
-        <div class="dia">3</div>
-        <div class="dia">4</div>
-        <div class="dia">5</div>
-        <div class="dia">6</div>
-    </div>
-
-        </div>
-
-
+        <article class="mensaje">
+          <h1>Mejor precio online</h1>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin a turpis rutrum, rhoncus mi a, aliquet lectus. Morbi a leo felis. Proin blandit quis sem sed ullamcorper. In hac habitasse platea dictumst. Cras vitae fringilla nulla.</p>
         </article>
 
-
-<article class="seleccionocupaciones">
-
-<section>
-  <h1>Adultos</h1>
-  <button href="#">-</button>
-  <span>1</span>
-  <button href="#">+</button>
-</section>
-
-<section>
-  <h1>Adultos</h1>
-  <button>-</button>
-  <span>1</span>
-  <button href="#">+</button>
-</section>
-
-</article>
-
-
+        <article class="mensaje">
+          <h1>Ventajas reserva online</h1>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin a turpis rutrum, rhoncus mi a, aliquet lectus. </p>
+        </article>
 
       </section>
 
-
-    </section>
-
-    <section class="mensajes">
-
-      <article class="mensaje">
-        <h1>Mejor precio online</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin a turpis rutrum, rhoncus mi a, aliquet lectus. Morbi a leo felis. Proin blandit quis sem sed ullamcorper. In hac habitasse platea dictumst. Cras vitae fringilla nulla.</p>
-      </article>
-
-      <article class="mensaje">
-        <h1>Ventajas reserva online</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin a turpis rutrum, rhoncus mi a, aliquet lectus. </p>
-      </article>
-
-    </section>
-
   </main>
 
-{{ partial "footer.html" . }}
+  {{ partial "footer.html" . }}
 
 
 </body>
