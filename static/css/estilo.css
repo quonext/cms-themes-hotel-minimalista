@@ -781,12 +781,12 @@ INICIO CALENDARIO
 	background-color: lightgrey;
 }
 
-.na {
+.na, .or {
 	color: lightgrey;
 }
 
 .av {
-	color: green;
+	color: darkblue;
 }
 
 .marcado {
